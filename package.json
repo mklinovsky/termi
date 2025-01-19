@@ -1,0 +1,14 @@
+{
+  "name": "termi-ai",
+  "version": "1.0.0",
+  "description": "AI in terminal",
+  "author": "michal.klinovsky@gmail.com",
+  "license": "ISC",
+  "type": "module",
+  "engines": {
+    "node": ">=23.6.0"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1"
+  }
+}
