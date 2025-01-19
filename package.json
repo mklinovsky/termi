@@ -9,6 +9,11 @@
     "node": ">=23.6.0"
   },
   "dependencies": {
-    "lowdb": "^7.0.1"
+    "dotenv": "^16.4.7",
+    "lowdb": "^7.0.1",
+    "openai": "^4.79.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7"
   }
 }

@@ -1,5 +1,18 @@
-import { getData } from '../store.ts';
+import { callLLM } from './openai-api.ts';
+import { getSystemPrompt } from './prompts.ts';
+import 'dotenv/config';
 
-const data = await getData();
+const systemPrompt = await getSystemPrompt();
 
-console.log(data);
+const response = await callLLM([
+  {
+    role: 'system',
+    content: systemPrompt,
+  },
+  {
+    role: 'user',
+    content: 'hey ;)',
+  },
+]);
+
+console.log(response);
