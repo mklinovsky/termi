@@ -9,15 +9,22 @@
     "node": ">=23.6.0"
   },
   "scripts": {
-    "start": "node --no-warnings src/main.ts"
+    "start": "node --no-warnings src/main.ts",
+    "test": "vitest"
+  },
+  "bin": {
+    "termi": "./bin/cli.ts"
   },
   "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^13.1.0",
     "dotenv": "^16.4.7",
     "lowdb": "^7.0.1",
     "openai": "^4.79.1",
-    "chalk": "^5.0.0"
+    "ora": "^8.2.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7"
+    "@types/node": "^22.10.7",
+    "vitest": "^3.0.5"
   }
 }

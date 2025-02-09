@@ -1,5 +1,9 @@
 import { JSONFilePreset } from 'lowdb/node';
-import { type AiMessage, type Conversation } from './types.ts';
+import {
+  type AiMessage,
+  type Conversation,
+  type ConversationType,
+} from './types.ts';
 import { randomUUID } from 'node:crypto';
 
 type Data = {
@@ -9,7 +13,7 @@ type Data = {
 const defaultData: Data = { conversations: [] };
 
 async function getDb() {
-  const db = await JSONFilePreset<Data>('db.json', defaultData);
+  const db = await JSONFilePreset<Data>('db/db.json', defaultData);
   return db;
 }
 
@@ -18,14 +22,29 @@ export async function getData() {
   return db.data;
 }
 
-export async function createConversation() {
+export async function createConversation(type: ConversationType) {
   const db = await getDb();
-  const conversation = { id: randomUUID(), messages: [] };
+  const conversation = { id: randomUUID(), type, messages: [] };
 
   db.data.conversations.push(conversation);
   await db.write();
 
   return conversation.id;
+}
+
+export async function saveConversation(
+  type: ConversationType,
+  messages: AiMessage[],
+) {
+  const db = await getDb();
+  const conversation = {
+    id: randomUUID(),
+    type,
+    messages,
+  };
+
+  db.data.conversations.push(conversation);
+  await db.write();
 }
 
 export async function saveMessages(
@@ -50,4 +69,3 @@ export async function clearData() {
   db.data = defaultData;
   await db.write();
 }
-

@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import type { AiMessage } from './types.ts';
+import type { AiMessage } from '../types.ts';
 
 export async function callLLM(messages: AiMessage[]) {
   const client = new OpenAI();

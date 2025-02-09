@@ -1,47 +1,30 @@
-import { callLLM } from '../llm.ts';
-import { getSystemPrompt } from '../prompts.ts';
-import { createConversation, saveMessages } from '../store.ts';
-import type { AiMessage } from '../types.ts';
-import * as readline from 'readline';
 import chalk from 'chalk';
+import { readFromStream } from '../io/read-from-stream.ts';
+import { callLLM } from './llm.ts';
+import { saveConversation } from '../store.ts';
+import type { AiMessage, AssistantType } from '../types.ts';
+import ora from 'ora';
+import { getSystemPrompt } from './prompts.ts';
+import fs from 'fs';
+import path from 'path';
 
-export async function startChat() {
-  const conversationId = await createConversation();
-  const systemPrompt = await getSystemPrompt();
-  
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  const messages: AiMessage[] = [{ role: 'system', content: systemPrompt }];
-
-  while (true) {
-    const userInput = await getUserInput(rl);
-    if (!userInput) {
-      break;
-    }
-
-    const userMessage: AiMessage = { role: 'user', content: userInput };
-    messages.push(userMessage);
-
-    const aiResponse = await callLLM(messages);
-
-    const assistantMessage: AiMessage = { role: 'assistant', content: aiResponse.content };
-    messages.push(assistantMessage);
-
-    await saveMessages(conversationId, [userMessage, assistantMessage]);
-
-    console.log(chalk.green(`\n🤖 ${aiResponse.content}\n`));
+export async function assistant(type: AssistantType) {
+  const input = await readFromStream();
+  if (!input) {
+    return;
   }
 
-  rl.close();
+  const systemPrompt = await getSystemPrompt(type);
+  const systemMessage: AiMessage = { role: 'system', content: systemPrompt };
+  const userMessage: AiMessage = { role: 'user', content: input };
+
+  const spinner = ora({ color: 'yellow' }).start();
+  const aiResponse = await callLLM([systemMessage, userMessage]);
+  spinner.stop();
+
+  await saveConversation(type, [userMessage, aiResponse]);
+
+  console.log(chalk.green(aiResponse.content));
 }
 
-function getUserInput(rl: readline.Interface): Promise<string | undefined> {
-  return new Promise((resolve) => {
-    rl.question(chalk.yellow('>> '), (input) => {
-      resolve(input);
-    });
-  });
-}
+function saveMessageToFile(message: AiMessage) {}
