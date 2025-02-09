@@ -5,8 +5,6 @@ import { saveConversation } from '../store.ts';
 import type { AiMessage, AssistantType } from '../types.ts';
 import ora from 'ora';
 import { getSystemPrompt } from './prompts.ts';
-import fs from 'fs';
-import path from 'path';
 
 export async function assistant(type: AssistantType) {
   const input = await readFromStream();
@@ -26,5 +24,3 @@ export async function assistant(type: AssistantType) {
 
   console.log(chalk.green(aiResponse.content));
 }
-
-function saveMessageToFile(message: AiMessage) {}

@@ -5,6 +5,7 @@ import {
   type ConversationType,
 } from './types.ts';
 import { randomUUID } from 'node:crypto';
+import fs from 'fs';
 
 type Data = {
   conversations: Conversation[];
@@ -45,6 +46,7 @@ export async function saveConversation(
 
   db.data.conversations.push(conversation);
   await db.write();
+  saveMessageToFile(conversation.messages.at(-1));
 }
 
 export async function saveMessages(
@@ -62,10 +64,21 @@ export async function saveMessages(
 
   conversation.messages.push(...messages);
   await db.write();
+  saveMessageToFile(messages.at(-1));
 }
 
 export async function clearData() {
   const db = await getDb();
   db.data = defaultData;
   await db.write();
+  console.log('Data deleted ✅');
+}
+
+function saveMessageToFile(message: AiMessage | undefined) {
+  if (message?.role !== 'assistant') {
+    return;
+  }
+
+  const content = (message.content as string) ?? '';
+  fs.writeFileSync('db/last-message.md', content, 'utf8');
 }

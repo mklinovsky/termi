@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { Command } from 'commander';
 import { startChat } from '../src/assistants/chat.ts';
 import { assistant } from '../src/assistants/assistant.ts';
+import { clearData } from '../src/store.ts';
 
 const program = new Command();
 
@@ -21,5 +22,10 @@ program
   .action((options) => {
     assistant(options.type);
   });
+
+program
+  .command('clear-data')
+  .description('Clear conversations data')
+  .action(clearData);
 
 program.parse(process.argv);
