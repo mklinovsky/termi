@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
+import type { AiMessage } from './types.ts';
 
-export async function callLLM(messages: OpenAI.ChatCompletionMessageParam[]) {
+export async function callLLM(messages: AiMessage[]) {
   const client = new OpenAI();
 
   const response = await client.chat.completions.create({

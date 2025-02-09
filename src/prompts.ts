@@ -5,6 +5,11 @@ export async function getSystemPrompt() {
   return addContext(file);
 }
 
+export async function getExplainerPrompt() {
+  const file = readFileSync('./prompts/explainer.txt', 'utf8');
+  return addContext(file);
+}
+
 function addContext(prompt: string) {
   const context = `<context>Current date and time: ${new Date().toString()}</context>`;
   return `${prompt}\n\n${context}`;
