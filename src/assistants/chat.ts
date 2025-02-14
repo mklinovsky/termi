@@ -13,10 +13,13 @@ export async function startChat(context: string) {
 
   const messages: AiMessage[] = [{ role: 'system', content: systemPrompt }];
   if (context) {
-    messages.push({
-      role: 'user',
+    const contextMessage = {
+      role: 'user' as const,
       content: context,
-    });
+    };
+
+    messages.push(contextMessage);
+    await saveMessages(conversationId, [contextMessage]);
   }
 
   const spinner = ora({
