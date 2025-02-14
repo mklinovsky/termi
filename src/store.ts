@@ -5,7 +5,9 @@ import {
   type ConversationType,
 } from './types.ts';
 import { randomUUID } from 'node:crypto';
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 type Data = {
   conversations: Conversation[];
@@ -14,7 +16,11 @@ type Data = {
 const defaultData: Data = { conversations: [] };
 
 async function getDb() {
-  const db = await JSONFilePreset<Data>('db/db.json', defaultData);
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const db = await JSONFilePreset<Data>(
+    path.join(__dirname, '../db/db.json'),
+    defaultData,
+  );
   return db;
 }
 

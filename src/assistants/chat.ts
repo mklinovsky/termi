@@ -6,11 +6,17 @@ import chalk from 'chalk';
 import { rl } from '../io/readline-interface.ts';
 import { getUserInput } from '../io/get-user-input.ts';
 
-export async function startChat() {
+export async function startChat(context: string) {
   const conversationId = await createConversation('chat');
   const systemPrompt = await getSystemPrompt('chat');
 
   const messages: AiMessage[] = [{ role: 'system', content: systemPrompt }];
+  if (context) {
+    messages.push({
+      role: 'user',
+      content: context,
+    });
+  }
 
   while (true) {
     const userInput = await getUserInput(rl);

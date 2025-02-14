@@ -2,25 +2,45 @@ import chalk from 'chalk';
 import { readFromStream } from '../io/read-from-stream.ts';
 import { callLLM } from './llm.ts';
 import { saveConversation } from '../store.ts';
-import type { AiMessage, AssistantType } from '../types.ts';
+import {
+  assistantLoadingText,
+  type AiMessage,
+  type AssistantType,
+} from '../types.ts';
 import ora from 'ora';
 import { getSystemPrompt } from './prompts.ts';
 
-export async function assistant(type: AssistantType) {
-  const input = await readFromStream();
-  if (!input) {
-    return;
+export async function assistant(
+  type: AssistantType,
+  input?: string,
+  context?: string,
+) {
+  let userInput = input;
+  if (!userInput) {
+    userInput = await readFromStream();
+    if (!userInput) {
+      return;
+    }
   }
 
   const systemPrompt = await getSystemPrompt(type);
   const systemMessage: AiMessage = { role: 'system', content: systemPrompt };
-  const userMessage: AiMessage = { role: 'user', content: input };
+  const userMessage: AiMessage[] = [{ role: 'user', content: userInput }];
 
-  const spinner = ora({ color: 'yellow' }).start();
-  const aiResponse = await callLLM([systemMessage, userMessage]);
+  if (context) {
+    userMessage.unshift({ role: 'user' as const, content: context });
+  }
+
+  const spinner = ora({
+    color: 'yellow',
+    text: assistantLoadingText[type],
+  }).start();
+
+  const aiResponse = await callLLM([systemMessage, ...userMessage]);
+
   spinner.stop();
 
-  await saveConversation(type, [userMessage, aiResponse]);
+  await saveConversation(type, [...userMessage, aiResponse]);
 
-  console.log(chalk.green(aiResponse.content));
+  console.log(`\n${chalk.green(aiResponse.content)}`);
 }
