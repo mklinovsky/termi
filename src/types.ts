@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 
 export type AiMessage = OpenAI.ChatCompletionMessageParam;
 
-export type AssistantType = 'explain' | 'review' | 'ask' | 'bash';
+export type AssistantType = 'explain' | 'review' | 'ask' | 'bash' | 'writer';
 export type ConversationType = 'chat' | AssistantType;
 
 export type Conversation = {
@@ -16,4 +16,5 @@ export const assistantLoadingText: Record<AssistantType, string> = {
   review: 'Reviewing...',
   ask: 'Asking...',
   bash: 'Creating bash command...',
+  writer: 'Writing...',
 };

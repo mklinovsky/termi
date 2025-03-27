@@ -5,8 +5,8 @@ export async function callLLM(messages: AiMessage[]) {
   const client = new OpenAI();
 
   const response = await client.chat.completions.create({
-    model: 'gpt-4o',
-    temperature: 0.1,
+    model: 'o3-mini',
+    //temperature: 0.1,
     messages,
   });
 

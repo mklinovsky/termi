@@ -11,7 +11,7 @@ export async function startChat(context: string) {
   const conversationId = await createConversation('chat');
   const systemPrompt = await getSystemPrompt('chat');
 
-  const messages: AiMessage[] = [{ role: 'system', content: systemPrompt }];
+  const messages: AiMessage[] = [{ role: 'developer', content: systemPrompt }];
   if (context) {
     const contextMessage = {
       role: 'user' as const,

@@ -1,12 +1,17 @@
 #! /usr/bin/env -S node --no-warnings
 
-import 'dotenv/config';
 import { Command } from 'commander';
 import { startChat } from '../src/assistants/chat.ts';
 import { assistant } from '../src/assistants/assistant.ts';
 import { clearData } from '../src/store.ts';
+import { config } from 'dotenv';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 try {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  config({ path: path.resolve(__dirname, '../.env') });
+
   const program = new Command();
 
   program

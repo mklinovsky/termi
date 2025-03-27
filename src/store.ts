@@ -14,9 +14,9 @@ type Data = {
 };
 
 const defaultData: Data = { conversations: [] };
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function getDb() {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const db = await JSONFilePreset<Data>(
     path.join(__dirname, '../db/db.json'),
     defaultData,
@@ -86,5 +86,9 @@ function saveMessageToFile(message: AiMessage | undefined) {
   }
 
   const content = (message.content as string) ?? '';
-  fs.writeFileSync('db/last-message.md', content, 'utf8');
+  fs.writeFileSync(
+    path.join(__dirname, '../db/last-message.md'),
+    content,
+    'utf8',
+  );
 }

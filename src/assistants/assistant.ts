@@ -24,7 +24,7 @@ export async function assistant(
   }
 
   const systemPrompt = await getSystemPrompt(type);
-  const systemMessage: AiMessage = { role: 'system', content: systemPrompt };
+  const systemMessage: AiMessage = { role: 'developer', content: systemPrompt };
   const userMessage: AiMessage[] = [{ role: 'user', content: userInput }];
 
   if (context) {
