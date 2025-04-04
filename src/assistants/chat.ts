@@ -7,7 +7,7 @@ import { getUserInput } from '../io/get-user-input.ts';
 import ora from 'ora';
 import { createReadlineInterface } from '../io/readline-interface.ts';
 
-export async function startChat(context: string) {
+export async function startChat(context?: string) {
   const conversationId = await createConversation('chat');
   const systemPrompt = await getSystemPrompt('chat');
 
