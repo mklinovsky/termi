@@ -1,24 +1,20 @@
-import { JSONFilePreset } from 'lowdb/node';
+import { JSONFilePreset } from 'npm:lowdb/node';
+import { join } from '@std/path';
 import {
   type AiMessage,
   type Conversation,
   type ConversationType,
 } from './types.ts';
-import { randomUUID } from 'node:crypto';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 type Data = {
   conversations: Conversation[];
 };
 
 const defaultData: Data = { conversations: [] };
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function getDb() {
   const db = await JSONFilePreset<Data>(
-    path.join(__dirname, '../db/db.json'),
+    join(import.meta.dirname ?? '', '../db/db.json'),
     defaultData,
   );
   return db;
@@ -31,7 +27,7 @@ export async function getData() {
 
 export async function createConversation(type: ConversationType) {
   const db = await getDb();
-  const conversation = { id: randomUUID(), type, messages: [] };
+  const conversation = { id: crypto.randomUUID(), type, messages: [] };
 
   db.data.conversations.push(conversation);
   await db.write();
@@ -45,7 +41,7 @@ export async function saveConversation(
 ) {
   const db = await getDb();
   const conversation = {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     type,
     messages,
   };
@@ -86,9 +82,9 @@ function saveMessageToFile(message: AiMessage | undefined) {
   }
 
   const content = (message.content as string) ?? '';
-  fs.writeFileSync(
-    path.join(__dirname, '../db/last-message.md'),
+
+  Deno.writeTextFileSync(
+    join(import.meta.dirname ?? '', '../db/last-message.md'),
     content,
-    'utf8',
   );
 }

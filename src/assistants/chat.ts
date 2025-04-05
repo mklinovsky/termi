@@ -2,14 +2,12 @@ import { callLLM } from './llm.ts';
 import { getSystemPrompt } from './prompts.ts';
 import { createConversation, saveMessages } from '../store.ts';
 import type { AiMessage } from '../types.ts';
-import chalk from 'chalk';
-import { getUserInput } from '../io/get-user-input.ts';
-import ora from 'ora';
-import { createReadlineInterface } from '../io/readline-interface.ts';
+import chalk from 'npm:chalk';
+import { Spinner } from '@std/cli/unstable-spinner';
 
 export async function startChat(context?: string) {
   const conversationId = await createConversation('chat');
-  const systemPrompt = await getSystemPrompt('chat');
+  const systemPrompt = getSystemPrompt('chat');
 
   const messages: AiMessage[] = [{ role: 'developer', content: systemPrompt }];
   if (context) {
@@ -22,14 +20,13 @@ export async function startChat(context?: string) {
     await saveMessages(conversationId, [contextMessage]);
   }
 
-  const spinner = ora({
+  const spinner = new Spinner({
     color: 'yellow',
-    text: 'Thinking...',
+    message: 'Thinking...',
   });
 
   while (true) {
-    const rl = createReadlineInterface();
-    const userInput = await getUserInput(rl);
+    const userInput = prompt(chalk.yellow('>>'));
     if (!userInput) {
       break;
     }
@@ -49,7 +46,6 @@ export async function startChat(context?: string) {
 
     await saveMessages(conversationId, [userMessage, assistantMessage]);
 
-    rl.write(chalk.green(`\n🤖 ${aiResponse.content}\n\n`));
-    rl.close();
+    console.log(chalk.green(`\n🤖 ${aiResponse.content}\n`));
   }
 }

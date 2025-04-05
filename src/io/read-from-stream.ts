@@ -1,4 +1,4 @@
-export async function readFromStream(stream = process.stdin) {
+export async function readFromStream(stream = Deno.stdin.readable) {
   let data = '';
 
   for await (const chunk of stream) {

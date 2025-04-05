@@ -1,0 +1,46 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@openai/openai@^4.91.1": "4.91.1",
+    "jsr:@std/cli@^1.0.15": "1.0.15",
+    "jsr:@std/path@^1.0.8": "1.0.8",
+    "npm:chalk@*": "5.4.1",
+    "npm:commander@*": "13.1.0",
+    "npm:lowdb@*": "7.0.1"
+  },
+  "jsr": {
+    "@openai/openai@4.91.1": {
+      "integrity": "f6ff99239df4522a640e62e6c2968dda04c68f470020cd416d9e575309eab616"
+    },
+    "@std/cli@1.0.15": {
+      "integrity": "e79ba3272ec710ca44d8342a7688e6288b0b88802703f3264184b52893d5e93f"
+    },
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    }
+  },
+  "npm": {
+    "chalk@5.4.1": {
+      "integrity": "sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w=="
+    },
+    "commander@13.1.0": {
+      "integrity": "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw=="
+    },
+    "lowdb@7.0.1": {
+      "integrity": "sha512-neJAj8GwF0e8EpycYIDFqEPcx9Qz4GUho20jWFR7YiFeXzF1YMLdxB36PypcTSPMA+4+LvgyMacYhlr18Zlymw==",
+      "dependencies": [
+        "steno"
+      ]
+    },
+    "steno@4.0.2": {
+      "integrity": "sha512-yhPIQXjrlt1xv7dyPQg2P17URmXbuM5pdGkpiMB3RenprfiBlvK415Lctfe0eshk90oA7/tNq7WEiMK8RSP39A=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@openai/openai@^4.91.1",
+      "jsr:@std/cli@^1.0.15",
+      "jsr:@std/path@^1.0.8"
+    ]
+  }
+}

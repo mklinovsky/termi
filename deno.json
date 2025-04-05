@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-env --allow-read --allow-write --allow-net src/main.ts",
+    "build": "deno install --allow-env --allow-read --allow-write --allow-net --global --config=./deno.json -f --name=termi src/main.ts"
+  },
+  "imports": {
+    "@openai/openai": "jsr:@openai/openai@^4.91.1",
+    "@std/cli": "jsr:@std/cli@^1.0.15",
+    "@std/path": "jsr:@std/path@^1.0.8"
+  },
+  "fmt": {
+    "singleQuote": true
+  }
+}

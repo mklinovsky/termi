@@ -1,4 +1,4 @@
-import OpenAI from 'openai';
+import OpenAI from '@openai/openai';
 import type { AiMessage } from '../types.ts';
 
 export async function callLLM(messages: AiMessage[]) {
@@ -6,7 +6,6 @@ export async function callLLM(messages: AiMessage[]) {
 
   const response = await client.chat.completions.create({
     model: 'o3-mini',
-    //temperature: 0.1,
     messages,
   });
 

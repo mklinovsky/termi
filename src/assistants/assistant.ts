@@ -1,13 +1,13 @@
-import chalk from 'chalk';
+import chalk from 'npm:chalk';
+import { Spinner } from '@std/cli/unstable-spinner';
 import { readFromStream } from '../io/read-from-stream.ts';
 import { callLLM } from './llm.ts';
 import { saveConversation } from '../store.ts';
 import {
-  assistantLoadingText,
   type AiMessage,
+  assistantLoadingText,
   type AssistantType,
 } from '../types.ts';
-import ora from 'ora';
 import { getSystemPrompt } from './prompts.ts';
 
 export async function assistant(
@@ -23,7 +23,7 @@ export async function assistant(
     }
   }
 
-  const systemPrompt = await getSystemPrompt(type);
+  const systemPrompt = getSystemPrompt(type);
   const systemMessage: AiMessage = { role: 'developer', content: systemPrompt };
   const userMessage: AiMessage[] = [{ role: 'user', content: userInput }];
 
@@ -31,13 +31,13 @@ export async function assistant(
     userMessage.unshift({ role: 'user' as const, content: context });
   }
 
-  const spinner = ora({
+  const spinner = new Spinner({
     color: 'yellow',
-    text: assistantLoadingText[type],
-  }).start();
+    message: assistantLoadingText[type],
+  });
 
+  spinner.start();
   const aiResponse = await callLLM([systemMessage, ...userMessage]);
-
   spinner.stop();
 
   await saveConversation(type, [...userMessage, aiResponse]);
