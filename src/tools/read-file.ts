@@ -1,12 +1,12 @@
-import { z } from 'npm:zod';
-import { ToolFn } from '../types.ts';
-import { resolve } from 'node:path';
+import { z } from "npm:zod";
+import { ToolFn } from "../types.ts";
+import { resolve } from "node:path";
 
 export const readFileToolDefinition = {
-  name: 'read_file',
-  description: 'Read the content of a file at the given path.',
+  name: "read_file",
+  description: "Read the content of a file at the given path.",
   parameters: z.object({
-    path: z.string().describe('The path of the file to read'),
+    path: z.string().describe("The path of the file to read"),
   }),
 };
 
@@ -19,7 +19,7 @@ export const readFile: ToolFn<Args, string> = async ({ toolArgs }) => {
     const currentDir = Deno.cwd();
     const resolvedPath = resolve(currentDir, path);
     if (!resolvedPath.startsWith(currentDir)) {
-      throw new Error('Path escapes the current directory');
+      throw new Error("Path escapes the current directory");
     }
 
     // Read the file
@@ -29,4 +29,3 @@ export const readFile: ToolFn<Args, string> = async ({ toolArgs }) => {
     return `Error reading file: ${error}`;
   }
 };
-
