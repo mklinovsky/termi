@@ -37,7 +37,7 @@ export async function assistant(
   });
 
   spinner.start();
-  const aiResponse = await callLLM([systemMessage, ...userMessage]);
+  const aiResponse = await callLLM([systemMessage, ...userMessage], []);
   spinner.stop();
 
   await saveConversation(type, [...userMessage, aiResponse]);

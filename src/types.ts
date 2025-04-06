@@ -11,6 +11,12 @@ export type Conversation = {
   messages: AiMessage[];
 };
 
+export type ToolDefinition<Parameters> = {
+  name: string;
+  parameters: Parameters;
+  description: string;
+};
+
 export const assistantLoadingText: Record<AssistantType, string> = {
   explain: 'Explaining...',
   review: 'Reviewing...',
@@ -18,3 +24,7 @@ export const assistantLoadingText: Record<AssistantType, string> = {
   bash: 'Creating bash command...',
   writer: 'Writing...',
 };
+
+export interface ToolFn<A = unknown, T = unknown> {
+  (input: { userMessage: string; toolArgs: A }): Promise<T>;
+}
