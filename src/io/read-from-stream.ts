@@ -1,8 +1,9 @@
 export async function readFromStream(stream = Deno.stdin.readable) {
-  let data = '';
+  const decoder = new TextDecoder("utf-8");
+  let data = "";
 
   for await (const chunk of stream) {
-    data += chunk;
+    data += decoder.decode(chunk);
   }
 
   return data;
