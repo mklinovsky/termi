@@ -1,14 +1,14 @@
-import { ensureDir } from '@std/fs';
-import { dirname, resolve } from '@std/path';
-import { z } from 'npm:zod';
-import { ToolFn } from '../types.ts';
+import { ensureDir } from "@std/fs";
+import { dirname, resolve } from "@std/path";
+import { z } from "npm:zod";
+import { ToolFn } from "../types.ts";
 
 export const createFileToolDefinition = {
-  name: 'create_file',
-  description: 'Create a file with the specified content at the given path.',
+  name: "create_file",
+  description: "Create a file with the specified content at the given path.",
   parameters: z.object({
-    path: z.string().describe('The path where the file should be created'),
-    content: z.string().describe('The content to write to the file'),
+    path: z.string().describe("The path where the file should be created"),
+    content: z.string().describe("The content to write to the file"),
   }),
 };
 
@@ -21,7 +21,7 @@ export const createFile: ToolFn<Args, string> = async ({ toolArgs }) => {
     const currentDir = Deno.cwd();
     const resolvedPath = resolve(currentDir, path);
     if (!resolvedPath.startsWith(currentDir)) {
-      throw new Error('Path escapes the current directory');
+      throw new Error("Path escapes the current directory");
     }
 
     const directory = dirname(resolvedPath);

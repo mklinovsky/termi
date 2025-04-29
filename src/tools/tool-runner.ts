@@ -1,9 +1,9 @@
-import type OpenAI from '@openai/openai';
-import { generateImage, imageToolDefinition } from './generate-image.ts';
-import { listFiles, listFilesToolDefinition } from './list-files.ts';
-import { createFile, createFileToolDefinition } from './create-file.ts';
-import { readFile, readFileToolDefinition } from './read-file.ts';
-import { gitDiff, gitDiffToolDefinition } from './git-diff.ts';
+import type OpenAI from "@openai/openai";
+import { generateImage, imageToolDefinition } from "./generate-image.ts";
+import { listFiles, listFilesToolDefinition } from "./list-files.ts";
+import { createFile, createFileToolDefinition } from "./create-file.ts";
+import { readFile, readFileToolDefinition } from "./read-file.ts";
+import { gitDiff, gitDiffToolDefinition } from "./git-diff.ts";
 
 export function runTool(
   toolCall: OpenAI.Chat.Completions.ChatCompletionMessageToolCall,
@@ -11,7 +11,7 @@ export function runTool(
 ) {
   const input = {
     userMessage,
-    toolArgs: JSON.parse(toolCall.function.arguments || '{}'),
+    toolArgs: JSON.parse(toolCall.function.arguments || "{}"),
   };
 
   switch (toolCall.function.name) {

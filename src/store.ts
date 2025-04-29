@@ -1,10 +1,10 @@
-import { JSONFilePreset } from 'npm:lowdb/node';
-import { join } from '@std/path';
+import { JSONFilePreset } from "npm:lowdb/node";
+import { join } from "@std/path";
 import {
   type AiMessage,
   type Conversation,
   type ConversationType,
-} from './types.ts';
+} from "./types.ts";
 
 type Data = {
   conversations: Conversation[];
@@ -14,7 +14,7 @@ const defaultData: Data = { conversations: [] };
 
 async function getDb() {
   const db = await JSONFilePreset<Data>(
-    join(import.meta.dirname ?? '', '../db/db.json'),
+    join(import.meta.dirname ?? "", "../db/db.json"),
     defaultData,
   );
   return db;
@@ -73,18 +73,18 @@ export async function clearData() {
   const db = await getDb();
   db.data = defaultData;
   await db.write();
-  console.log('Data deleted ✅');
+  console.log("Data deleted ✅");
 }
 
 function saveMessageToFile(message: AiMessage | undefined) {
-  if (message?.role !== 'assistant') {
+  if (message?.role !== "assistant") {
     return;
   }
 
-  const content = (message.content as string) ?? '';
+  const content = (message.content as string) ?? "";
 
   Deno.writeTextFileSync(
-    join(import.meta.dirname ?? '', '../db/last-message.md'),
+    join(import.meta.dirname ?? "", "../db/last-message.md"),
     content,
   );
 }

@@ -8,8 +8,5 @@
     "@std/cli": "jsr:@std/cli@^1.0.15",
     "@std/fs": "jsr:@std/fs@^1.0.15",
     "@std/path": "jsr:@std/path@^1.0.8"
-  },
-  "fmt": {
-    "singleQuote": true
   }
 }

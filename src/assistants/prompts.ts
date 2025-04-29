@@ -1,8 +1,8 @@
-import { join } from '@std/path';
-import type { ConversationType } from '../types.ts';
+import { join } from "@std/path";
+import type { ConversationType } from "../types.ts";
 
 export function getSystemPrompt(type: ConversationType) {
-  const filename = join(import.meta.dirname ?? '', `../../prompts/${type}.txt`);
+  const filename = join(import.meta.dirname ?? "", `../../prompts/${type}.txt`);
   const file = Deno.readTextFileSync(filename);
 
   return addContext(file);

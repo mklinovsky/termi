@@ -1,20 +1,20 @@
-import { callLLM } from './llm.ts';
-import { getSystemPrompt } from './prompts.ts';
-import { createConversation, saveMessages } from '../store.ts';
-import type { AiMessage } from '../types.ts';
-import chalk from 'npm:chalk';
-import { Spinner } from '@std/cli/unstable-spinner';
-import { tools } from '../tools/index.ts';
-import { runTool } from '../tools/tool-runner.ts';
+import { callLLM } from "./llm.ts";
+import { getSystemPrompt } from "./prompts.ts";
+import { createConversation, saveMessages } from "../store.ts";
+import type { AiMessage } from "../types.ts";
+import chalk from "npm:chalk";
+import { Spinner } from "@std/cli/unstable-spinner";
+import { tools } from "../tools/index.ts";
+import { runTool } from "../tools/tool-runner.ts";
 
 export async function startChat(context?: string) {
-  const conversationId = await createConversation('chat');
-  const systemPrompt = getSystemPrompt('chat');
+  const conversationId = await createConversation("chat");
+  const systemPrompt = getSystemPrompt("chat");
 
-  const messages: AiMessage[] = [{ role: 'developer', content: systemPrompt }];
+  const messages: AiMessage[] = [{ role: "developer", content: systemPrompt }];
   if (context) {
     const contextMessage = {
-      role: 'user' as const,
+      role: "user" as const,
       content: context,
     };
 
@@ -24,21 +24,21 @@ export async function startChat(context?: string) {
   }
 
   const spinner = new Spinner({
-    color: 'yellow',
-    message: 'Thinking...',
+    color: "yellow",
+    message: "Thinking...",
   });
 
   while (true) {
-    const userInput = prompt(chalk.yellow('>>'));
+    const userInput = prompt(chalk.yellow(">>"));
     if (!userInput) {
       break;
     }
 
-    const userMessage: AiMessage = { role: 'user', content: userInput };
+    const userMessage: AiMessage = { role: "user", content: userInput };
     messages.push(userMessage);
     await saveMessages(conversationId, [userMessage]);
 
-    spinner.message = 'Thinking...';
+    spinner.message = "Thinking...";
     spinner.start();
 
     const aiResponseContent = await processAiResponse(
@@ -60,12 +60,12 @@ async function processAiResponse(
   spinner: Spinner,
   conversationId: string,
 ): Promise<string> {
-  let aiResponseContent = '';
+  let aiResponseContent = "";
 
   while (true) {
     const aiResponse = await callLLM(messages, tools);
     messages.push(aiResponse);
-    aiResponseContent = aiResponse.content ?? '';
+    aiResponseContent = aiResponse.content ?? "";
     await saveMessages(conversationId, [aiResponse]);
 
     const toolCall = aiResponse?.tool_calls?.[0];
@@ -74,7 +74,7 @@ async function processAiResponse(
       spinner.message = `⚙️ Tool: ${toolCall.function.name}`;
       const toolResponse = await runTool(toolCall, userInput);
       const toolMessage: AiMessage = {
-        role: 'tool',
+        role: "tool",
         tool_call_id: toolCall.id,
         content: toolResponse,
       };
