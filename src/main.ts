@@ -8,7 +8,7 @@ try {
 
   program
     .name("termi")
-    .description("A CLI tool with usefull ai assistants and chat")
+    .description("A CLI tool with AI assistants and chat.")
     .version("1.0.0");
 
   program

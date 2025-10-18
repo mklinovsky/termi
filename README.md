@@ -1,4 +1,4 @@
-# Termi-AI
+# Termi 🤖
 
 A CLI tool with AI assistants and chat.
 
@@ -8,7 +8,7 @@ This tool requires the `OPENAI_API_KEY` environment variable to be set.
 
 ## Installation
 
-To install the Termi-AI CLI tool, use the following command:
+To install the Termi CLI tool, use the following command:
 
 ```bash
 deno install --allow-env --allow-read --allow-write --allow-net --global --config=./deno.json -f --name=termi src/main.ts
@@ -16,7 +16,7 @@ deno install --allow-env --allow-read --allow-write --allow-net --global --confi
 
 ## Usage
 
-Termi-AI offers two main modes of operation: a continuous chat session and single-task assistants.
+Termi offers two main modes of operation: a continuous chat session and single-task assistants.
 
 ### Chat (Interactive Session)
 
@@ -98,7 +98,7 @@ alias explain="termi assistant -t explain"
 alias review="termi assistant -t review"
 
 # Open the last message in nvim - (n)vim (last)
-alias nlast="nvim /path/to/termi-ai/db/last-message.md"
+alias nlast="nvim /path/to/termi/db/last-message.md"
 
 # Explain the content of the clipboard - (e)xplain (c)lipboard
 alias ec="pbpaste | explain"
@@ -116,7 +116,7 @@ askc() {
 
 ### Piping
 
-You can pipe the output of other commands to Termi-AI assistants.
+You can pipe the output of other commands to Termi assistants.
 
 **Explain the output of a command:**
 

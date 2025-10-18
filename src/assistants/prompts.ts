@@ -9,8 +9,15 @@ export function getSystemPrompt(type: ConversationType) {
 }
 
 function addContext(prompt: string) {
-  const context = `<context>Current date and time: ${
-    new Date().toString()
-  }</context>`;
+  const context = `
+<context>
+Current date and time: ${new Date().toString()}
+User's OS: ${Deno.build.os}
+Working directory: ${Deno.cwd()}
+Shell: ${Deno.env.get("SHELL") || "unknown"}
+Architecture: ${Deno.build.arch}
+
+</context>`;
+
   return `${prompt}\n\n${context}`;
 }
