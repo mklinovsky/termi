@@ -1,7 +1,7 @@
 import { Command } from "commander";
-import { startChat } from "../src/assistants/chat.ts";
-import { assistant } from "../src/assistants/assistant.ts";
-import { clearData } from "../src/store.ts";
+import { startChat } from "./assistants/chat.ts";
+import { assistant } from "./assistants/assistant.ts";
+import { clearData } from "./store.ts";
 
 try {
   const program = new Command();
