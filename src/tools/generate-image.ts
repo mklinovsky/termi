@@ -1,4 +1,4 @@
-import { z } from "npm:zod";
+import { z } from "zod";
 import { ToolFn } from "../types.ts";
 import OpenAI from "@openai/openai";
 
@@ -25,5 +25,8 @@ export const generateImage: ToolFn<Args, string> = async ({ toolArgs }) => {
     size: "1024x1024",
   });
 
-  return response.data[0].url!;
+  if (!response.data?.[0].url) {
+    return "I was unable to generate an image. Please try again.";
+  }
+  return response.data[0].url;
 };

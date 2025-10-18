@@ -1,11 +1,11 @@
-import OpenAI from "jsr:@openai/openai";
+import OpenAI from "@openai/openai";
 import { zodFunction } from "@openai/openai/helpers/zod";
 import type { AiMessage, ToolDefinition } from "../types.ts";
-import { ZodObject } from "npm:zod@3";
+import { AnyZodObject } from "zod";
 
 export async function callLLM(
   messages: AiMessage[],
-  tools: ToolDefinition<ZodObject>[],
+  tools: ToolDefinition<AnyZodObject>[],
 ) {
   const client = new OpenAI();
 

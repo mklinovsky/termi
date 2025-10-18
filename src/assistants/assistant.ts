@@ -1,4 +1,4 @@
-import chalk from "npm:chalk";
+import chalk from "chalk";
 import { Spinner } from "@std/cli/unstable-spinner";
 import { readFromStream } from "../io/read-from-stream.ts";
 import { callLLM } from "./llm.ts";

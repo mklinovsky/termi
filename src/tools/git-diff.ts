@@ -1,4 +1,4 @@
-import { z } from "npm:zod";
+import { z } from "zod";
 import { ToolFn } from "../types.ts";
 
 export const gitDiffToolDefinition = {
@@ -10,7 +10,9 @@ export const gitDiffToolDefinition = {
 
 type Args = z.infer<typeof gitDiffToolDefinition.parameters>;
 
-export const gitDiff: ToolFn<Args, string> = async ({ toolArgs }) => {
+export const gitDiff: ToolFn<Args, string> = async (
+  { toolArgs: _toolArgs },
+) => {
   const command = new Deno.Command("git", {
     args: ["diff"],
     stdout: "piped",

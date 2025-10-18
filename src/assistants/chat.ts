@@ -2,7 +2,7 @@ import { callLLM } from "./llm.ts";
 import { getSystemPrompt } from "./prompts.ts";
 import { createConversation, saveMessages } from "../store.ts";
 import type { AiMessage } from "../types.ts";
-import chalk from "npm:chalk";
+import chalk from "chalk";
 import { Spinner } from "@std/cli/unstable-spinner";
 import { tools } from "../tools/index.ts";
 import { runTool } from "../tools/tool-runner.ts";

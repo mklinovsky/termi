@@ -1,22 +1,24 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
-    "jsr:@openai/openai@*": "4.91.1",
-    "jsr:@openai/openai@^4.91.1": "4.91.1",
+    "jsr:@openai/openai@^4.91.0": "4.102.0",
     "jsr:@std/cli@^1.0.15": "1.0.15",
     "jsr:@std/fs@^1.0.15": "1.0.15",
     "jsr:@std/path@^1.0.8": "1.0.8",
+    "npm:@types/node@*": "24.2.0",
     "npm:chalk@*": "5.4.1",
+    "npm:chalk@^5.6.2": "5.6.2",
     "npm:commander@*": "13.1.0",
+    "npm:commander@^14.0.1": "14.0.1",
     "npm:lowdb@*": "7.0.1",
-    "npm:zod@*": "3.24.2",
-    "npm:zod@3": "3.24.2"
+    "npm:lowdb@^7.0.1": "7.0.1",
+    "npm:zod@3": "3.25.76"
   },
   "jsr": {
-    "@openai/openai@4.91.1": {
-      "integrity": "f6ff99239df4522a640e62e6c2968dda04c68f470020cd416d9e575309eab616",
+    "@openai/openai@4.102.0": {
+      "integrity": "ea5201bc5c8a696d3a5139a9cd2252e3ab9b2b880769a9cd7f05602ea1a02acf",
       "dependencies": [
-        "npm:zod@3"
+        "npm:zod"
       ]
     },
     "@std/cli@1.0.15": {
@@ -33,11 +35,23 @@
     }
   },
   "npm": {
+    "@types/node@24.2.0": {
+      "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
     "chalk@5.4.1": {
       "integrity": "sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w=="
     },
+    "chalk@5.6.2": {
+      "integrity": "sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA=="
+    },
     "commander@13.1.0": {
       "integrity": "sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw=="
+    },
+    "commander@14.0.1": {
+      "integrity": "sha512-2JkV3gUZUVrbNA+1sjBOYLsMZ5cEEl8GTFP2a4AVz5hvasAMCQ1D2l2le/cX+pV4N6ZU17zjUahLpIXRrnWL8A=="
     },
     "lowdb@7.0.1": {
       "integrity": "sha512-neJAj8GwF0e8EpycYIDFqEPcx9Qz4GUho20jWFR7YiFeXzF1YMLdxB36PypcTSPMA+4+LvgyMacYhlr18Zlymw==",
@@ -48,16 +62,23 @@
     "steno@4.0.2": {
       "integrity": "sha512-yhPIQXjrlt1xv7dyPQg2P17URmXbuM5pdGkpiMB3RenprfiBlvK415Lctfe0eshk90oA7/tNq7WEiMK8RSP39A=="
     },
-    "zod@3.24.2": {
-      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    "undici-types@7.10.0": {
+      "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag=="
+    },
+    "zod@3.25.76": {
+      "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@openai/openai@^4.91.1",
+      "jsr:@openai/openai@^4.91.0",
       "jsr:@std/cli@^1.0.15",
       "jsr:@std/fs@^1.0.15",
-      "jsr:@std/path@^1.0.8"
+      "jsr:@std/path@^1.0.8",
+      "npm:chalk@^5.6.2",
+      "npm:commander@^14.0.1",
+      "npm:lowdb@^7.0.1",
+      "npm:zod@3"
     ]
   }
 }

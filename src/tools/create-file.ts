@@ -1,6 +1,6 @@
 import { ensureDir } from "@std/fs";
 import { dirname, resolve } from "@std/path";
-import { z } from "npm:zod";
+import { z } from "zod";
 import { ToolFn } from "../types.ts";
 
 export const createFileToolDefinition = {

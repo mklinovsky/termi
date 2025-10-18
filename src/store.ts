@@ -1,4 +1,4 @@
-import { JSONFilePreset } from "npm:lowdb/node";
+import { JSONFilePreset } from "lowdb/node";
 import { join } from "@std/path";
 import {
   type AiMessage,

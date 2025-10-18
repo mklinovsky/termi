@@ -16,11 +16,13 @@ deno install --allow-env --allow-read --allow-write --allow-net --global --confi
 
 ## Usage
 
-Termi offers two main modes of operation: a continuous chat session and single-task assistants.
+Termi offers two main modes of operation: a continuous chat session and
+single-task assistants.
 
 ### Chat (Interactive Session)
 
-Start a continuous chat session with the AI assistant. This mode is ideal for conversations and multi-turn interactions.
+Start a continuous chat session with the AI assistant. This mode is ideal for
+conversations and multi-turn interactions.
 
 ```bash
 termi chat
@@ -34,7 +36,8 @@ termi chat --context "$(pbpaste)" # Use clipboard content as context
 
 ### Assistants (One-off commands)
 
-Use a specific assistant for a single task. This mode is suitable for quick, one-off requests.
+Use a specific assistant for a single task. This mode is suitable for quick,
+one-off requests.
 
 ```bash
 termi assistant --type <assistant-type> "Your message"
@@ -42,11 +45,11 @@ termi assistant --type <assistant-type> "Your message"
 
 Replace `<assistant-type>` with one of the following:
 
--   `ask`: For general technical questions.
--   `bash`: For generating bash commands.
--   `explain`: For explaining outputs of bash commands or file contents.
--   `review`: For reviewing code changes.
--   `writer`: For improving Slack messages.
+- `ask`: For general technical questions.
+- `bash`: For generating bash commands.
+- `explain`: For explaining outputs of bash commands or file contents.
+- `review`: For reviewing code changes.
+- `writer`: For improving Slack messages.
 
 You can also provide a context for the assistant:
 
@@ -66,23 +69,30 @@ termi clear-data
 
 The following tools are available in the chat:
 
--   `create_file`: Create a file with the specified content at the given path.
--   `generate_image`: Generate an image.
--   `git_diff`: Compare the current working directory with the latest commit in the git repository.
--   `list_files_in_current_directory`: Recursively list all files in current working directory.
--   `read_file`: Read the content of a file at the given path.
+- `create_file`: Create a file with the specified content at the given path.
+- `generate_image`: Generate an image.
+- `git_diff`: Compare the current working directory with the latest commit in
+  the git repository.
+- `list_files_in_current_directory`: Recursively list all files in current
+  working directory.
+- `read_file`: Read the content of a file at the given path.
 
 ## Customizing Prompts
 
-The prompts for the assistants are located in the `prompts/` directory. You can customize these prompts to change the behavior of the assistants. Each file in this directory corresponds to an assistant type.
+The prompts for the assistants are located in the `prompts/` directory. You can
+customize these prompts to change the behavior of the assistants. Each file in
+this directory corresponds to an assistant type.
 
 ## Assistants
 
-The available assistants are currently hardcoded. I'll maybe add dynamic ones later if I will have a time for that.
+The available assistants are currently hardcoded. I'll maybe add dynamic ones
+later if I will have a time for that.
 
 ## Useful Aliases
 
-Here are some examples of useful aliases that I use. You can add them to your shell configuration file (e.g., `.zshrc`, `.bashrc`) and customize them to fit your workflow.
+Here are some examples of useful aliases that I use. You can add them to your
+shell configuration file (e.g., `.zshrc`, `.bashrc`) and customize them to fit
+your workflow.
 
 ```bash
 # Start a chat session - (ch)at
@@ -139,4 +149,3 @@ git diff | review
 ```
 
 This will ask the AI to review the changes in your current working directory.
-

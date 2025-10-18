@@ -1,12 +1,17 @@
 {
   "tasks": {
     "dev": "deno run --allow-env --allow-read --allow-write --allow-net src/main.ts",
-    "build": "deno install --allow-env --allow-read --allow-write --allow-net --global --config=./deno.json -f --name=termi src/main.ts"
+    "build": "deno install --allow-env --allow-read --allow-write --allow-net --global --config=./deno.json -f --name=termi src/main.ts",
+    "pre-commit": "deno fmt && deno lint && deno check"
   },
   "imports": {
-    "@openai/openai": "jsr:@openai/openai@^4.91.1",
+    "@openai/openai": "jsr:@openai/openai@^4.91.0",
     "@std/cli": "jsr:@std/cli@^1.0.15",
     "@std/fs": "jsr:@std/fs@^1.0.15",
-    "@std/path": "jsr:@std/path@^1.0.8"
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "chalk": "npm:chalk@^5.6.2",
+    "commander": "npm:commander@^14.0.1",
+    "lowdb": "npm:lowdb@^7.0.1",
+    "zod": "npm:zod@3"
   }
 }

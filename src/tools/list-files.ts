@@ -1,4 +1,4 @@
-import { z } from "npm:zod";
+import { z } from "zod";
 import { ToolFn } from "../types.ts";
 import { walk } from "@std/fs";
 import { relative } from "node:path";
@@ -11,7 +11,9 @@ export const listFilesToolDefinition = {
 
 type Args = z.infer<typeof listFilesToolDefinition.parameters>;
 
-export const listFiles: ToolFn<Args, string> = async ({ toolArgs }) => {
+export const listFiles: ToolFn<Args, string> = async (
+  { toolArgs: _toolArgs },
+) => {
   const files = [];
   const dir = Deno.cwd();
 
